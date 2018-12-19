@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /*
 http://localhost:8080/booking/api/newsletter?email=isa@gmail.com -> HTTP GET request
  */
-
+// a small change
 
 @RestController("/api") // returns response value and json rest calls
 public class NewsletterController {
