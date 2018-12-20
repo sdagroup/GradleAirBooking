@@ -3,10 +3,7 @@ package com.sdagroup.gradleairbooking.controller;
 import com.sdagroup.gradleairbooking.service.NewsletterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
 
@@ -32,5 +29,15 @@ public class NewsletterRestController {
     public HttpStatus createNewsletter(@RequestParam("email") String email) {
        newsletterService.insertNewsLetter(email);
        return HttpStatus.OK;
+    }
+
+    /*
+    With POST mapping, details are hidden, unlike GET mapping.
+    This is good when sending over sensitive information
+     */
+    @PostMapping(value= "/newsletter")
+    public HttpStatus addNewsletter(@RequestParam("email") final String email) {
+        newsletterService.insertNewsLetter(email);
+        return HttpStatus.OK;
     }
 }
