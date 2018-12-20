@@ -1,11 +1,13 @@
 package com.sdagroup.gradleairbooking.controller;
 
+import com.sdagroup.gradleairbooking.model.NewsletterModel;
 import com.sdagroup.gradleairbooking.service.NewsletterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
+import java.util.List;
 
 /**
  * Created by Ryan Alexander on 19/12/2018.
@@ -39,5 +41,11 @@ public class NewsletterRestController {
     public HttpStatus addNewsletter(@RequestParam("email") final String email) {
         newsletterService.insertNewsLetter(email);
         return HttpStatus.OK;
+    }
+
+    @GetMapping(value="/newsletters")
+    public List<NewsletterModel> getAllNewsletters(){
+        List<NewsletterModel> newsletterModels = newsletterService.getAllNewsletters();
+        return newsletterModels;
     }
 }

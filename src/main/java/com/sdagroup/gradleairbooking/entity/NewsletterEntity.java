@@ -3,6 +3,7 @@ package com.sdagroup.gradleairbooking.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,7 +15,7 @@ import java.util.Date;
 /**
  * Created by Ryan Alexander on 19/12/2018.
  */
-
+@Data
 @Entity
 @Builder
 @NoArgsConstructor
