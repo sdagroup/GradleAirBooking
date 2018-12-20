@@ -33,6 +33,7 @@ public class NewsletterService {
         }
     }
 
+    // our converter class from entity to model
     public List<NewsletterModel> getAllNewsletters() {
         List<NewsletterEntity> newsletterEntities = newsletterRepository.findAll();
         List<NewsletterModel> newsletterModels =
