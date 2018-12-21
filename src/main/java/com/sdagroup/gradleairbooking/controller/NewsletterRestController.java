@@ -54,16 +54,16 @@ public class NewsletterRestController {
         return newsletterService.findById(id);
     }
 
-//
-//    @PutMapping(value ="/newsletter")
-//    public HttpStatus updateNewsletterById(@Valid @RequestBody final NewsletterModel newsletterModel) {
-//        newsletterService.updateNewsletter(newsletterModel);
-//        return HttpStatus.OK;
-//    }
-//
-//    @DeleteMapping(value ="/newsletter/{id}")
-//    public HttpStatus deleteNewsletterById(@PathVariable("id") final Long id) {
-//        newsletterService.deleteNewsletterById(id);
-//        return HttpStatus.OK;
-//    }
+
+    @PutMapping(value ="/newsletter")
+    public HttpStatus updateNewsletterById(@Valid @RequestBody final NewsletterModel newsletterModel) {
+        newsletterService.updateNewsletter(newsletterModel);
+        return HttpStatus.OK;
+    }
+
+    @DeleteMapping(value ="/newsletter/{id}")
+    public HttpStatus deleteNewsletterById(@PathVariable("id") final Long id) {
+        newsletterService.deleteNewsletterById(id);
+        return HttpStatus.OK;
+    }
 }

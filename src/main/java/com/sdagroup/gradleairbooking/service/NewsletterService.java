@@ -61,7 +61,23 @@ public class NewsletterService {
         return newsletterEntityToModelConverter.toModel(newsletterEntity);
     }
 
+    public void updateNewsletter(final NewsletterModel newsletterModel) {
+        Optional<NewsletterEntity> newsletterEntity = newsletterRepository.findById(newsletterModel.getId());
+        if (newsletterEntity.isPresent()){
+            newsletterEntity.get().setEmail(newsletterModel.getEmail());
+            newsletterRepository.save(newsletterEntity.get());
+        } else {
+            throw new RuntimeException("Sorry. The newsletter email you want to update could not be found in our records");
+        }
+    }
 
-
+    public void deleteNewsletterById(final Long id){
+        Optional<NewsletterEntity> newsletterEntity = newsletterRepository.findById(id);
+        if (newsletterEntity.isPresent()) {
+            newsletterRepository.delete(newsletterEntity.get());
+        } else {
+            throw new RuntimeException("Sorry. The newsletter email you want to delete could not be found");
+        }
+    }
 }
 
