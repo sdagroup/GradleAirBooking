@@ -20,5 +20,4 @@ public interface NewsletterRepository extends JpaRepository<NewsletterEntity, Lo
     It will try to generate our custom query
      */
     Optional<NewsletterEntity> findByEmail(final String email);
-
 }

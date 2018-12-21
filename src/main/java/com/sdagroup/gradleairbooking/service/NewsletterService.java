@@ -33,13 +33,35 @@ public class NewsletterService {
         }
     }
 
+
     // our converter class from entity to model
     public List<NewsletterModel> getAllNewsletters() {
         List<NewsletterEntity> newsletterEntities = newsletterRepository.findAll();
+
+//        // non lambda for loop version
+//        List<NewsletterModel> newsletterModels1 = new ArrayList<>();
+//        for(NewsletterEntity newsletterEntity: newsletterEntities){
+//            NewsletterModel newsletterModel = new NewsletterModel();
+//            newsletterModel.setId(newsletterEntity.getId());
+//            newsletterModel.setEmail(newsletterEntity.getEmail());
+//            newsletterModel.setCreatedAt(newsletterEntity.getCreatedAt());
+//            newsletterModels1.add(newsletterModel);
+//        }
+
+        // lambda Java8 expression instead of needing to use a for loop
         List<NewsletterModel> newsletterModels =
                 newsletterEntities.stream()
-                        .map(newsletterEntityToModelConverter::toModel).collect(Collectors.toList());
+                        .map(newsletterEntityToModelConverter::toModel)
+                        .collect(Collectors.toList());
         return newsletterModels;
     }
+
+    public NewsletterModel findById (final Long id) {
+        NewsletterEntity newsletterEntity = newsletterRepository.getOne(id);
+        return newsletterEntityToModelConverter.toModel(newsletterEntity);
+    }
+
+
+
 }
 

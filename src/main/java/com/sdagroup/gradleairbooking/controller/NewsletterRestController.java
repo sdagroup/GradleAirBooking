@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServlet;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -48,4 +48,22 @@ public class NewsletterRestController {
         List<NewsletterModel> newsletterModels = newsletterService.getAllNewsletters();
         return newsletterModels;
     }
+
+    @GetMapping (value = "/newsletter/{id}")
+    public NewsletterModel getAllNewsletters(@PathVariable("id") final Long id) {
+        return newsletterService.findById(id);
+    }
+
+//
+//    @PutMapping(value ="/newsletter")
+//    public HttpStatus updateNewsletterById(@Valid @RequestBody final NewsletterModel newsletterModel) {
+//        newsletterService.updateNewsletter(newsletterModel);
+//        return HttpStatus.OK;
+//    }
+//
+//    @DeleteMapping(value ="/newsletter/{id}")
+//    public HttpStatus deleteNewsletterById(@PathVariable("id") final Long id) {
+//        newsletterService.deleteNewsletterById(id);
+//        return HttpStatus.OK;
+//    }
 }
