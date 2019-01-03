@@ -29,7 +29,7 @@ public class NewsletterRestController {
     // create newsletter for visitors
     // also returns http status call
     public HttpStatus createNewsletter(@RequestParam("email") String email) {
-       newsletterService.insertNewsLetter(email);
+       newsletterService.insertNewsletter(email);
        return HttpStatus.OK;
     }
 
@@ -39,7 +39,7 @@ public class NewsletterRestController {
      */
     @PostMapping(value= "/newsletter")
     public HttpStatus addNewsletter(@RequestParam("email") final String email) {
-        newsletterService.insertNewsLetter(email);
+        newsletterService.insertNewsletter(email);
         return HttpStatus.OK;
     }
 

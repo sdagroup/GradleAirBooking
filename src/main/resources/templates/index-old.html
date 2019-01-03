@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<h1>Newsletter form</h1>
+<p th:text ="'Hello,' + ${user}"/>
+
+
+<!--POST request is triggered via submit button. -->
+<form action="#" th:action="@{/newsletter}" th:object="${newsletter}" method="post">
+      <p>Email: <input type="text" th:field="*{email}"/></p>
+    <p>
+    <input type="submit" value="Subscribe"/>
+    <input type="reset" value="Reset"/>
+    </p>
+</form>
+</body>
+</html>

@@ -24,7 +24,7 @@ public class NewsletterService {
     @Autowired
     private NewsletterEntityToModelConverter newsletterEntityToModelConverter;
 
-    public void insertNewsLetter(final String email) {
+    public void insertNewsletter(final String email) {
         Optional<NewsletterEntity> newsletterEntity = newsletterRepository.findByEmail(email);
 
         if (!newsletterEntity.isPresent()) {

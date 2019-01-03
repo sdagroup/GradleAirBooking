@@ -1,0 +1,320 @@
+@font-face {
+	font-family: "around-the-world-icons";
+	src: url("around-the-world-icons.eot");
+	src: url("around-the-world-icons.eot#iefix") format("embedded-opentype"),
+	url("around-the-world-icons.woff") format("woff"),
+	url("around-the-world-icons.ttf") format("truetype"),
+	url("around-the-world-icons.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="around-the-world-icons-"]:before, [class*=" around-the-world-icons-"]:before,
+[class^="around-the-world-icons-"]:after, [class*=" around-the-world-icons-"]:after {   
+	font-family: around-the-world-icons;
+    display: inline-block;
+  font: normal normal normal 14px/1 around-the-world-icons;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}.around-the-world-icons-alarm2:before {
+	content: "\e000";
+}
+.around-the-world-icons-alcohol13:before {
+	content: "\e001";
+}
+.around-the-world-icons-alcohol14:before {
+	content: "\e002";
+}
+.around-the-world-icons-bag8:before {
+	content: "\e003";
+}
+.around-the-world-icons-bag9:before {
+	content: "\e004";
+}
+.around-the-world-icons-baggage:before {
+	content: "\e005";
+}
+.around-the-world-icons-ball70:before {
+	content: "\e006";
+}
+.around-the-world-icons-beach21:before {
+	content: "\e007";
+}
+.around-the-world-icons-bedroom19:before {
+	content: "\e008";
+}
+.around-the-world-icons-boats:before {
+	content: "\e009";
+}
+.around-the-world-icons-camera149:before {
+	content: "\e00a";
+}
+.around-the-world-icons-car209:before {
+	content: "\e00b";
+}
+.around-the-world-icons-casino3:before {
+	content: "\e00c";
+}
+.around-the-world-icons-cliffs:before {
+	content: "\e00d";
+}
+.around-the-world-icons-clock13:before {
+	content: "\e00e";
+}
+.around-the-world-icons-clothing32:before {
+	content: "\e00f";
+}
+.around-the-world-icons-compass12:before {
+	content: "\e010";
+}
+.around-the-world-icons-construction40:before {
+	content: "\e011";
+}
+.around-the-world-icons-credit-card7:before {
+	content: "\e012";
+}
+.around-the-world-icons-desert1:before {
+	content: "\e013";
+}
+.around-the-world-icons-digital3:before {
+	content: "\e014";
+}
+.around-the-world-icons-direction67:before {
+	content: "\e015";
+}
+.around-the-world-icons-dive3:before {
+	content: "\e016";
+}
+.around-the-world-icons-dive:before {
+	content: "\e017";
+}
+.around-the-world-icons-dolphin2:before {
+	content: "\e018";
+}
+.around-the-world-icons-dumbbell3:before {
+	content: "\e019";
+}
+.around-the-world-icons-elevate:before {
+	content: "\e01a";
+}
+.around-the-world-icons-eyes17:before {
+	content: "\e01b";
+}
+.around-the-world-icons-fashion7:before {
+	content: "\e01c";
+}
+.around-the-world-icons-film2:before {
+	content: "\e01d";
+}
+.around-the-world-icons-film-strip1:before {
+	content: "\e01e";
+}
+.around-the-world-icons-float3:before {
+	content: "\e01f";
+}
+.around-the-world-icons-fun3:before {
+	content: "\e020";
+}
+.around-the-world-icons-gasoline6:before {
+	content: "\e021";
+}
+.around-the-world-icons-global50:before {
+	content: "\e022";
+}
+.around-the-world-icons-hanger1:before {
+	content: "\e023";
+}
+.around-the-world-icons-hats1:before {
+	content: "\e024";
+}
+.around-the-world-icons-home18:before {
+	content: "\e025";
+}
+.around-the-world-icons-horses1:before {
+	content: "\e026";
+}
+.around-the-world-icons-hot-air-balloon1:before {
+	content: "\e027";
+}
+.around-the-world-icons-hotel3:before {
+	content: "\e028";
+}
+.around-the-world-icons-identity5:before {
+	content: "\e029";
+}
+.around-the-world-icons-jellyfish:before {
+	content: "\e02a";
+}
+.around-the-world-icons-journey2:before {
+	content: "\e02b";
+}
+.around-the-world-icons-key20:before {
+	content: "\e02c";
+}
+.around-the-world-icons-look3:before {
+	content: "\e02d";
+}
+.around-the-world-icons-looking2:before {
+	content: "\e02e";
+}
+.around-the-world-icons-luggage21:before {
+	content: "\e02f";
+}
+.around-the-world-icons-mapping:before {
+	content: "\e030";
+}
+.around-the-world-icons-mask2:before {
+	content: "\e031";
+}
+.around-the-world-icons-monument3:before {
+	content: "\e032";
+}
+.around-the-world-icons-motorbike15:before {
+	content: "\e033";
+}
+.around-the-world-icons-motorbike16:before {
+	content: "\e034";
+}
+.around-the-world-icons-nautic:before {
+	content: "\e035";
+}
+.around-the-world-icons-navigation2:before {
+	content: "\e036";
+}
+.around-the-world-icons-net1:before {
+	content: "\e037";
+}
+.around-the-world-icons-ocean7:before {
+	content: "\e038";
+}
+.around-the-world-icons-photo17:before {
+	content: "\e039";
+}
+.around-the-world-icons-photo18:before {
+	content: "\e03a";
+}
+.around-the-world-icons-pointer42:before {
+	content: "\e03b";
+}
+.around-the-world-icons-pyramids2:before {
+	content: "\e03c";
+}
+.around-the-world-icons-racket2:before {
+	content: "\e03d";
+}
+.around-the-world-icons-restaurant53:before {
+	content: "\e03e";
+}
+.around-the-world-icons-rows3:before {
+	content: "\e03f";
+}
+.around-the-world-icons-safe-box2:before {
+	content: "\e040";
+}
+.around-the-world-icons-scholar:before {
+	content: "\e041";
+}
+.around-the-world-icons-scooter1:before {
+	content: "\e042";
+}
+.around-the-world-icons-scuba:before {
+	content: "\e043";
+}
+.around-the-world-icons-sea33:before {
+	content: "\e044";
+}
+.around-the-world-icons-shelter :before {
+	content: "\e045";
+}
+.around-the-world-icons-shower2:before {
+	content: "\e046";
+}
+.around-the-world-icons-snow59:before {
+	content: "\e047";
+}
+.around-the-world-icons-snow60:before {
+	content: "\e048";
+}
+.around-the-world-icons-snow61:before {
+	content: "\e049";
+}
+.around-the-world-icons-stamps1:before {
+	content: "\e04a";
+}
+.around-the-world-icons-star25:before {
+	content: "\e04b";
+}
+.around-the-world-icons-suitcase61:before {
+	content: "\e04c";
+}
+.around-the-world-icons-summer16:before {
+	content: "\e04d";
+}
+.around-the-world-icons-summer17:before {
+	content: "\e04e";
+}
+.around-the-world-icons-summer19:before {
+	content: "\e04f";
+}
+.around-the-world-icons-sunny28:before {
+	content: "\e050";
+}
+.around-the-world-icons-surfing2:before {
+	content: "\e051";
+}
+.around-the-world-icons-swim4:before {
+	content: "\e052";
+}
+.around-the-world-icons-swimming2:before {
+	content: "\e053";
+}
+.around-the-world-icons-symbol18:before {
+	content: "\e054";
+}
+.around-the-world-icons-temple4:before {
+	content: "\e055";
+}
+.around-the-world-icons-tents:before {
+	content: "\e056";
+}
+.around-the-world-icons-ticket3:before {
+	content: "\e057";
+}
+.around-the-world-icons-train10:before {
+	content: "\e058";
+}
+.around-the-world-icons-transport31:before {
+	content: "\e059";
+}
+.around-the-world-icons-transport33:before {
+	content: "\e05a";
+}
+.around-the-world-icons-transport37:before {
+	content: "\e05b";
+}
+.around-the-world-icons-travelling9:before {
+	content: "\e05c";
+}
+.around-the-world-icons-tray1:before {
+	content: "\e05d";
+}
+.around-the-world-icons-umbrella66:before {
+	content: "\e05e";
+}
+.around-the-world-icons-vehicle72:before {
+	content: "\e05f";
+}
+.around-the-world-icons-vehicle73:before {
+	content: "\e060";
+}
+.around-the-world-icons-water79:before {
+	content: "\e061";
+}
+.around-the-world-icons-wheels7:before {
+	content: "\e062";
+}
+.around-the-world-icons-wind4:before {
+	content: "\e063";
+}
