@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title Of Site -->
+    <title>Extretion</title>
+    <meta name="description" content="Gradle Air Booking Application for holiday makers and owners">
+    <meta name="keywords" content="booking, hotel, resort, travel, holiday, tour, accommodation, vocation, trip">
+    <meta name="author" content="crenoveative">
+
+    <!--// for showing page well within Mobile view formats-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Fav and Touch Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          th:href="@{/image/index/apple-touch-icon-144-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          th:href="@{/image/index/ico/apple-touch-icon-114-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          th:href="@{/image/index/apple-touch-icon-72-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed"
+          th:href="@{/image/index/apple-touch-icon-57-precomposed.png}">
+    <link rel="shortcut icon" th:href="@{/image/index/favicon.png}">
+
+    <!-- CSS Plugins -->
+    <!--<link rel="stylesheet" type="text/css" href="./index_files/bootstrap.min.css" media="screen">-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" media="screen">
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/component.css}" rel="stylesheet">
+
+    <!-- CSS Font Icons -->
+    <link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/pe-icon-7-stroke.css}">
+    <link rel="stylesheet" th:href="@{/css/ionicons.css}">
+    <link rel="stylesheet" th:href="@{/css/rivolicon/style.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon-streamline-outline.css}">
+    <link rel="stylesheet" th:href="@{/css/around-the-world-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/etline/style.css}">
+
+    <!-- Google Fonts -->
+    <link th:href="@{/css/css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/css(1)}" rel="stylesheet" type="text/css">
+
+    <!-- CSS Custom -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!-- Add your style -->
+    <link th:href="@{/css/your-style.css}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script th:href="@{/js/html5shiv.min.js}"></script>
+    <script th:href="@{/js/respond.min.js}"></script>
+    <![endif]-->
+
+    <style type="text/css"></style>
+    <script type="text/javascript">// Promises
+    var _eid_promises = {};
+    // Turn the incoming message from extension
+    // into pending Promise resolving
+    window.addEventListener("message", function (event) {
+        if (event.source !== window) return;
+        if (event.data.src && (event.data.src === "background.js")) {
+            console.log("Page received: ");
+            console.log(event.data);
+            // Get the promise
+            if (event.data.nonce) {
+                var p = _eid_promises[event.data.nonce];
+                // resolve
+                if (event.data.result === "ok") {
+                    if (event.data.signature !== undefined) {
+                        p.resolve({hex: event.data.signature});
+                    } else if (event.data.version !== undefined) {
+                        p.resolve(event.data.extension + "/" + event.data.version);
+                    } else if (event.data.cert !== undefined) {
+                        p.resolve({hex: event.data.cert});
+                    } else {
+                        console.log("No idea how to handle message");
+                        console.log(event.data);
+                    }
+                } else {
+                    // reject
+                    p.reject(new Error(event.data.result));
+                }
+                delete _eid_promises[event.data.nonce];
+            } else {
+                console.log("No nonce in event msg");
+            }
+        }
+    }, false);
+
+
+    function TokenSigning() {
+        function nonce() {
+            var val = "";
+            var hex = "abcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length));
+            return val;
+        }
+
+        function messagePromise(msg) {
+            return new Promise(function (resolve, reject) {
+                // amend with necessary metadata
+                msg["nonce"] = nonce();
+                msg["src"] = "page.js";
+                // send message
+                window.postMessage(msg, "*");
+                // and store promise callbacks
+                _eid_promises[msg.nonce] = {
+                    resolve: resolve,
+                    reject: reject
+                };
+            });
+        }
+
+        this.getCertificate = function (options) {
+            var msg = {type: "CERT", lang: options.lang, filter: options.filter};
+            console.log("getCertificate()");
+            return messagePromise(msg);
+        };
+        this.sign = function (cert, hash, options) {
+            var msg = {
+                type: "SIGN",
+                cert: cert.hex,
+                hash: hash.hex,
+                hashtype: hash.type,
+                lang: options.lang,
+                info: options.info
+            };
+            console.log("sign()");
+            return messagePromise(msg);
+        };
+        this.getVersion = function () {
+            console.log("getVersion()");
+            return messagePromise({
+                type: "VERSION"
+            });
+        };
+    }</script>
+</head>
+
+
+<body>
+
+<!--Begin # Modal login-->
+<div th:replace="login::login"></div>
+
+<div class="container-wrapper colored-navbar-brand">
+
+    <!-- start Header -->
+    <div th:replace="header::header"></div>
+    <!-- end Header -->
+
+    <div class="clear"></div>
+
+    <!-- start Main Wrapper -->
+    <div layout:fragment="content"></div>
+    <!-- end Main Wrapper -->
+
+    <div class="clear"></div>
+
+    <!--footer-->
+    <div th:replace="footer::footer"></div>
+
+</div>
+
+<!-- start Back To Top -->
+<div id="back-to-top" style="display: block;">
+    <a href="http://crenoveative.com/envato/extretion/index-2.html#"><i class="ion-ios-arrow-up"></i></a>
+</div>
+<!-- end Back To Top -->
+
+
+<!-- jQuery Cores -->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+
+<!-- Bootstrap Js -->
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- Plugins - serveral jquery plugins that use in this template -->
+<script type="text/javascript" th:src="@{/js/plugins.js}"></script>
+
+<!-- Custom js codes for plugins -->
+<script type="text/javascript" th:src="@{/js/customs.js}"></script>
+
+<!-- Date Piacker -->
+<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/customs-datepicker.js}"></script>
+
+
+</body>
+</html>
