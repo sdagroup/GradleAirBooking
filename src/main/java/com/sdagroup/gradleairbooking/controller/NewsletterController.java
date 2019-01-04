@@ -28,6 +28,6 @@ public class NewsletterController {
     @PostMapping("/newsletter")
     public ModelAndView insertNewsletter(@ModelAttribute("email") final String email){
         newsletterService.insertNewsletter(email);
-        return new ModelAndView("result").addObject("email", email);
+        return new ModelAndView("index").addObject("newsletter", new NewsletterModel());
     }
 }
