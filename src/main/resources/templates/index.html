@@ -6,81 +6,84 @@
       layout:decorate="~{layout}">
 <body>
 
-    <!-- start Main Wrapper -->
-    <div class="main-wrapper" layout:fragment="content">
+<!-- start Main Wrapper -->
+<div class="main-wrapper" layout:fragment="content">
 
-        <!-- start hero-header -->
-        <!--// + operator combines the strings, which is why this works-->
-        <div class="hero" th:style="'background-image:url(' + @{/image/hero-header/03.jpg} + ');'">
+    <!-- start hero-header -->
+    <!--// + operator combines the strings, which is why this works-->
+    <div class="hero" th:style="'background-image:url(' + @{/image/hero-header/03.jpg} + ');'">
 
-            <div class="container">
+        <div class="container">
 
-                <div class="hero-texting">
+            <div class="hero-texting">
 
-                    <!-- Hero heading -->
-                    <h1>Find a place to stay</h1>
+                <!-- Hero heading -->
+                <h1>Find a place to stay</h1>
 
-                    <!-- Hero subheading -->
-                    <p>More than 100,000 hotels, hostels, apartments and guest houses around the world</p>
+                <!-- Hero subheading -->
+                <p>More than 100,000 hotels, hostels, apartments and guest houses around the world</p>
 
-                </div>
+            </div>
 
-                <div class="main-search-wrapper">
+            <div class="main-search-wrapper">
 
-                    <div class="inner animated">
+                <div class="inner animated">
 
-                        <form class="row gap-20">
+                    <form th:action="@{/search}" th:object="${searchPropertyModel}" method="get" class="row gap-20">
 
-                            <div class="col-xs-12 col-sm-12 form-lg">
+                        <div class="col-xs-12 col-sm-12 form-lg">
 
-                                <div class="typeahead-container form-group form-icon-right">
+                            <div class="typeahead-container form-group form-icon-right">
 
-                                    <label class="destination-search-3">Where do you want to go?</label>
+                                <label class="destination-search-3">Where do you want to go?</label>
 
-                                    <div class="typeahead-field">
-                                        <input id="destination-search-3" name="destination-search-3" type="search"
-                                               autocomplete="off" class="form-control" placeholder="Try to type: new">
+                                <div class="typeahead-field">
+                                    <input id="destination-search-3" th:field="*{destination}"
+                                           name="destination-search-3" type="search"
+                                           autocomplete="off" class="form-control" placeholder="Try to type: new">
+                                </div>
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xss-12 col-xs-12 col-sm-5">
+
+                            <div class="row gap-20">
+
+                                <div class="col-xss-12 col-xs-6 col-sm-6">
+                                    <div class="form-group form-icon-right">
+                                        <label for="dpd1">Check-in</label>
+                                        <input name="dpd1" th:field="*{checkInDate}" class="form-control" id="dpd1"
+                                               placeholder="Check-in"
+                                               type="text" readonly="">
+                                        <i class="fa fa-calendar"></i>
                                     </div>
-                                    <i class="fa fa-map-marker"></i>
+                                </div>
+
+                                <div class="col-xss-12 col-xs-6 col-sm-6">
+                                    <div class="form-group form-icon-right">
+                                        <label for="dpd2">Check-out</label>
+                                        <input name="dpd2" th:field="*{checkOutDate}" class="form-control" id="dpd2"
+                                               placeholder="Check-out"
+                                               type="text" readonly="">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
                                 </div>
 
                             </div>
+                        </div>
 
-                            <div class="col-xss-12 col-xs-12 col-sm-5">
+                        <div class="col-xss-12 col-xs-12 col-sm-7">
 
-                                <div class="row gap-20">
+                            <div class="row gap-20">
+                                <div class="col-xss-12 col-xs-4 col-sm-4">
 
-                                    <div class="col-xss-12 col-xs-6 col-sm-6">
-                                        <div class="form-group form-icon-right">
-                                            <label for="dpd1">Check-in</label>
-                                            <input name="dpd1" class="form-control" id="dpd1" placeholder="Check-in"
-                                                   type="text" readonly="">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xss-12 col-xs-6 col-sm-6">
-                                        <div class="form-group form-icon-right">
-                                            <label for="dpd2">Check-out</label>
-                                            <input name="dpd2" class="form-control" id="dpd2" placeholder="Check-out"
-                                                   type="text" readonly="">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-xss-12 col-xs-12 col-sm-7">
-
-                                <div class="row gap-20">
-                                    <div class="col-xss-12 col-xs-4 col-sm-4">
-
-                                        <div class="form-group">
-                                            <label>Rooms</label>
-                                            <div class="fancy-select"><select class="custom-select fancified"
-                                                                              id="change-search-room"
-                                                                              style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+                                    <div class="form-group">
+                                        <label>Rooms</label>
+                                        <div class="fancy-select">
+                                            <select th:field="*{rooms}" class="custom-select fancified form-control"
+                                                    id="change-search-room">
                                                 <option value="0">Rooms</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -88,16 +91,6 @@
                                                 <option value="4">4‎</option>
                                                 <option value="5">5</option>
                                             </select>
-                                                <div class="form-control">Rooms</div>
-                                                <ul class="options">
-                                                    <li data-raw-value="0" class="selected">Rooms</li>
-                                                    <li data-raw-value="1">1</li>
-                                                    <li data-raw-value="2">2</li>
-                                                    <li data-raw-value="3">3</li>
-                                                    <li data-raw-value="4">4‎</li>
-                                                    <li data-raw-value="5">5</li>
-                                                </ul>
-                                            </div>
                                         </div>
 
                                     </div>
@@ -106,153 +99,58 @@
 
                                         <div class="form-group">
                                             <label>Adults</label>
-                                            <div class="fancy-select"><select class="custom-select fancified"
-                                                                              id="change-search-adult"
-                                                                              style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
-                                                <option value="0">Adult</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4‎</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                                <div class="form-control">Adult</div>
-                                                <ul class="options">
-                                                    <li data-raw-value="0" class="selected">Adult</li>
-                                                    <li data-raw-value="1">1</li>
-                                                    <li data-raw-value="2">2</li>
-                                                    <li data-raw-value="3">3</li>
-                                                    <li data-raw-value="4">4‎</li>
-                                                    <li data-raw-value="5">5</li>
-                                                </ul>
+                                            <div class="fancy-select">
+                                                <select th:field="*{adults}" class="custom-select fancified"
+                                                        id="change-search-adult">
+                                                    <option value="0">Adult</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4‎</option>
+                                                    <option value="5">5</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xss-12 col-xs-4 col-sm-4">
+
+                                            <div class="form-group">
+                                                <label>Children</label>
+                                                <div class="fancy-select">
+                                                    <select th:field="*{children}" class="custom-select fancified"
+                                                            id="change-search-child">
+                                                        <option value="0">Child</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4‎</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="col-xss-12 col-xs-4 col-sm-4">
+                                    <div class="col-xs-12">
 
-                                        <div class="form-group">
-                                            <label>Children</label>
-                                            <div class="fancy-select"><select class="custom-select fancified"
-                                                                              id="change-search-child"
-                                                                              style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
-                                                <option value="0">Child</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4‎</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                                <div class="form-control">Child</div>
-                                                <ul class="options">
-                                                    <li data-raw-value="0" class="selected">Child</li>
-                                                    <li data-raw-value="1">1</li>
-                                                    <li data-raw-value="2">2</li>
-                                                    <li data-raw-value="3">3</li>
-                                                    <li data-raw-value="4">4‎</li>
-                                                    <li data-raw-value="5">5</li>
-                                                </ul>
+                                        <div class="row">
+
+                                            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center">
+                                                <button type="submit" class="btn btn-block btn-primary btn-lg btn-icon">Search
+                                                <span
+                                                        class="icon"><i class="fa fa-search"></i></span></button>
                                             </div>
+
                                         </div>
 
                                     </div>
-                                </div>
 
-                            </div>
+                    </form>
 
-                            <div class="col-xs-12">
-
-                                <div class="row">
-
-                                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center">
-                                        <button class="btn btn-block btn-primary btn-lg btn-icon">Search <span
-                                                class="icon"><i class="fa fa-search"></i></span></button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </form>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        <!-- end hero-header -->
-
-        <div class="clear"></div>
-
-        <div class="post-hero">
-
-            <div class="container mb-5">
-
-                <div class="row">
-
-                    <div class="col-sm-4">
-
-                        <div class="featured-item-03 clearfix">
-
-                            <div class="icon">
-                                <i class="et-line-trophy"></i>
-                            </div>
-
-                            <div class="content">
-
-                                <h5>Quality Assured</h5>
-                                <p>So by colonel hearted ferrars. Draw from upon here gone add one. He in sportsman
-                                    household otherwise.</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-sm-4">
-
-                        <div class="featured-item-03 clearfix">
-
-                            <div class="icon">
-                                <i class="et-line-wallet"></i>
-                            </div>
-
-                            <div class="content">
-
-                                <h5>Book Now, Pay Later</h5>
-                                <p>Whatever throwing we on resolved entrance together graceful. Mrs assured add private
-                                    married removed.</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-sm-4">
-
-                        <div class="featured-item-03 clearfix">
-
-                            <div class="icon">
-                                <i class="et-line-heart"></i>
-                            </div>
-
-                            <div class="content">
-
-                                <h5>We Care, You Happy</h5>
-                                <p>Dependent certainty off discovery him his tolerably offending. Ham for attention
-                                    remainder sometimes.</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -260,55 +158,70 @@
 
         </div>
 
-        <div class="clear"></div>
+    </div>
+    <!-- end hero-header -->
 
-        <div class="container pt-50 pb-60">
+    <div class="clear"></div>
+
+    <div class="post-hero">
+
+        <div class="container mb-5">
 
             <div class="row">
 
-                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="col-sm-4">
 
-                    <div class="section-title">
-                        <h2>Top Destinations</h2>
+                    <div class="featured-item-03 clearfix">
+
+                        <div class="icon">
+                            <i class="et-line-trophy"></i>
+                        </div>
+
+                        <div class="content">
+
+                            <h5>Quality Assured</h5>
+                            <p>So by colonel hearted ferrars. Draw from upon here gone add one. He in sportsman
+                                household otherwise.</p>
+
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+                <div class="col-sm-4">
 
-            <div class="top-destination-wrapper">
+                    <div class="featured-item-03 clearfix">
 
-                <div class="GridLex-gap-20-wrapper">
+                        <div class="icon">
+                            <i class="et-line-wallet"></i>
+                        </div>
 
-                    <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
+                        <div class="content">
 
-                        <div th:each="topdestinationModel : ${topDestinationModels}" class="GridLex-col-3_sm-4_xs-6_xss-12">
+                            <h5>Book Now, Pay Later</h5>
+                            <p>Whatever throwing we on resolved entrance together graceful. Mrs assured add private
+                                married removed.</p>
 
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="'image/index/'+${topdestinationModel.city}+'.jpg'" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
+                        </div>
 
-                                            <div class="col-xs-7 place">
-                                                <!--<h4>Dubai</h4>-->
-                                                <h4 th:text="${topdestinationModel.city}"/>
-                                                <!--<p>Emirate</p>-->
-                                                <p th:text="${topdestinationModel.country}"/>
-                                            </div>
+                    </div>
 
-                                            <div class="col-xs-5 price">
-                                                <!--<p>984 hotels</p>-->
-                                                <p th:text="${topdestinationModel.amount} + 'hotels'"/></p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
+                </div>
 
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                <div class="col-sm-4">
+
+                    <div class="featured-item-03 clearfix">
+
+                        <div class="icon">
+                            <i class="et-line-heart"></i>
+                        </div>
+
+                        <div class="content">
+
+                            <h5>We Care, You Happy</h5>
+                            <p>Dependent certainty off discovery him his tolerably offending. Ham for attention
+                                remainder sometimes.</p>
 
                         </div>
 
@@ -319,75 +232,139 @@
             </div>
 
         </div>
-
-
-        <div class="overflow-hidden">
-
-            <div class="GridLex-grid-noGutter-equalHeight">
-
-                <div class="GridLex-col-6_sm-6_xs-12_xss-12 bg-primary">
-
-                    <div class="sell-or-buy">
-
-                        <div class="icon">
-                            <i class="et-line-briefcase"></i>
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <div class="content">
-
-                            <h3 class="uppercase">Traveller</h3>
-
-                            <p>Denote simple fat denied add worthy little use. As some he so high down am week. Conduct
-                                esteems by cottage to pasture we winding. On assistance he cultivated considered
-                                frequently. </p>
-
-                            <a href="http://crenoveative.com/envato/extretion/index-2.html#">Sign-up</a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="GridLex-col-6_sm-6_xs-12_xss-12 bg-warning">
-
-                    <div class="sell-or-buy">
-
-                        <div class="icon">
-                            <i class="et-line-map"></i>
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <div class="content">
-
-                            <h3 class="uppercase">Property Owner</h3>
-
-                            <p>Pasture he invited mr company shyness. But when shot real her. Chamber her observe
-                                visited removal six sending himself boy. At exquisite existence if an oh dependent
-                                excellent.</p>
-
-                            <a href="http://crenoveative.com/envato/extretion/index-2.html#">Become a host</a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="clear"></div>
-
-        <div th:replace="newsletter::newsletter"></div>
 
     </div>
-    <!-- end Main Wrapper -->
+
+    <div class="clear"></div>
+
+    <div class="container pt-50 pb-60">
+
+        <div class="row">
+
+            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+                <div class="section-title">
+                    <h2>Top Destinations</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="top-destination-wrapper">
+
+            <div class="GridLex-gap-20-wrapper">
+
+                <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
+
+                    <div th:each="topdestinationModel : ${topDestinationModels}" class="GridLex-col-3_sm-4_xs-6_xss-12">
+
+                        <div class="top-destination-item">
+                            <!--<a href="http://crenoveative.com/envato/extretion/index-2.html#">-->
+                            <a th:href="@{${'/search?destination='} + ${topdestinationModel.city}}">
+                                <div class="image">
+                                    <img th:src="'image/index/'+${topdestinationModel.city}+'.jpg'"
+                                         alt="Top Destinations">
+                                </div>
+                                <div class="content">
+                                    <div class="row gap-10">
+
+                                        <div class="col-xs-7 place">
+                                            <!--<h4>Dubai</h4>-->
+                                            <h4 th:text="${topdestinationModel.city}"/>
+                                            <!--<p>Emirate</p>-->
+                                            <p th:text="${topdestinationModel.country}"/>
+                                        </div>
+
+                                        <div class="col-xs-5 price">
+                                            <!--<p>984 hotels</p>-->
+                                            <p th:text="${topdestinationModel.amount} + 'hotels'"/></p>
+                                            <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="overflow-hidden">
+
+        <div class="GridLex-grid-noGutter-equalHeight">
+
+            <div class="GridLex-col-6_sm-6_xs-12_xss-12 bg-primary">
+
+                <div class="sell-or-buy">
+
+                    <div class="icon">
+                        <i class="et-line-briefcase"></i>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="content">
+
+                        <h3 class="uppercase">Traveller</h3>
+
+                        <p>Denote simple fat denied add worthy little use. As some he so high down am week. Conduct
+                            esteems by cottage to pasture we winding. On assistance he cultivated considered
+                            frequently. </p>
+
+                        <a href="http://crenoveative.com/envato/extretion/index-2.html#">Sign-up</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="GridLex-col-6_sm-6_xs-12_xss-12 bg-warning">
+
+                <div class="sell-or-buy">
+
+                    <div class="icon">
+                        <i class="et-line-map"></i>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="content">
+
+                        <h3 class="uppercase">Property Owner</h3>
+
+                        <p>Pasture he invited mr company shyness. But when shot real her. Chamber her observe
+                            visited removal six sending himself boy. At exquisite existence if an oh dependent
+                            excellent.</p>
+
+                        <a href="http://crenoveative.com/envato/extretion/index-2.html#">Become a host</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="clear"></div>
+
+    <div th:replace="newsletter::newsletter"></div>
+
+</div>
+<!-- end Main Wrapper -->
 
 </body>
 </html>
