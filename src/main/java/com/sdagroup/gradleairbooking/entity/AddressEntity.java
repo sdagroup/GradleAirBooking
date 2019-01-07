@@ -38,6 +38,6 @@ public class AddressEntity {
     private String country;
 
     @ManyToOne(targetEntity = PropertyEntity.class)
-    @JoinColumn(name = "propertyID", referencedColumnName = "propertyId")
+    @JoinColumn(name = "propertyId", referencedColumnName = "propertyId")
     private PropertyEntity property;
 }

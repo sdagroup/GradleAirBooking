@@ -282,212 +282,26 @@
 
                     <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
 
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
+                        <div th:each="topdestinationModel : ${topDestinationModels}" class="GridLex-col-3_sm-4_xs-6_xss-12">
 
                             <div class="top-destination-item">
                                 <a href="http://crenoveative.com/envato/extretion/index-2.html#">
                                     <div class="image">
-                                        <img th:src="@{/image/index/01.jpg}" alt="Top Destinations">
+                                        <img th:src="'image/index/'+${topdestinationModel.city}+'.jpg'" alt="Top Destinations">
                                     </div>
                                     <div class="content">
                                         <div class="row gap-10">
 
                                             <div class="col-xs-7 place">
-                                                <h4>Dubai</h4>
-                                                <p>Emirate</p>
+                                                <!--<h4>Dubai</h4>-->
+                                                <h4 th:text="${topdestinationModel.city}"/>
+                                                <!--<p>Emirate</p>-->
+                                                <p th:text="${topdestinationModel.country}"/>
                                             </div>
 
                                             <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/02.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Marrakesh</h4>
-                                                <p>Morocco</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/03.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>London</h4>
-                                                <p>England</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/04.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Montreal</h4>
-                                                <p>Canada</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/05.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Miami</h4>
-                                                <p>USA</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/06.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Rome</h4>
-                                                <p>Italy</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/07.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Paris</h4>
-                                                <p>France</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
-                                                <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="GridLex-col-3_sm-4_xs-6_xss-12">
-
-                            <div class="top-destination-item">
-                                <a href="http://crenoveative.com/envato/extretion/index-2.html#">
-                                    <div class="image">
-                                        <img th:src="@{/image/index/08.jpg}" alt="Top Destinations">
-                                    </div>
-                                    <div class="content">
-                                        <div class="row gap-10">
-
-                                            <div class="col-xs-7 place">
-                                                <h4>Tokyo</h4>
-                                                <p>Japan</p>
-                                            </div>
-
-                                            <div class="col-xs-5 price">
-                                                <p>984 hotels</p>
+                                                <!--<p>984 hotels</p>-->
+                                                <p th:text="${topdestinationModel.amount} + 'hotels'"/></p>
                                                 <p class="icon"><i class="ri ri-chevron-right-circle"></i></p>
                                             </div>
 
