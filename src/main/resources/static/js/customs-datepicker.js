@@ -12,7 +12,7 @@ $(document).ready(function () {
 	var nowTemp = new Date();
 	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	var checkin = $('#dpd1,#dpdFlight1').datepicker({
-		format: 'dd-mm-yyyy',
+		format: 'dd/mm/yyyy',
 		startDate: now,
 		autoclose: true,
 		orientation: 'top left'
@@ -34,7 +34,7 @@ $(document).ready(function () {
 	});	    
 
 	var checkout = $('#dpd2,#dpdFlight2').datepicker({
-		format: 'dd-mm-yyyy',
+		format: 'dd/mm/yyyy',
 		startDate: now,
 		autoclose: true,
 		orientation: 'top'
