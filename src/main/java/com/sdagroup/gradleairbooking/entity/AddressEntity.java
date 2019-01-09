@@ -34,9 +34,14 @@ public class AddressEntity {
     @Column
     private String country;
 
-    @ManyToOne(targetEntity = PropertyEntity.class)
-    @JoinColumn(name = "propertyId", referencedColumnName = "propertyId")
-    private PropertyEntity property;
+    @OneToOne(targetEntity = RoomEntity.class)
+    @JoinColumn(name= "roomId", referencedColumnName = "roomId")
+    private RoomEntity room;
 
+    @Column
+    private String amenities;
+
+    @Column
+    private String propertyDescription;
 
 }

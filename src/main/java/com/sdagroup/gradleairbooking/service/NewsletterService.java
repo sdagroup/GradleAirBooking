@@ -1,6 +1,6 @@
 package com.sdagroup.gradleairbooking.service;
 
-import com.sdagroup.gradleairbooking.converter.NewsletterEntityToModelConverter;
+import com.sdagroup.gradleairbooking.converter.SimpleEntityToModelConverter;
 import com.sdagroup.gradleairbooking.entity.NewsletterEntity;
 import com.sdagroup.gradleairbooking.model.NewsletterModel;
 import com.sdagroup.gradleairbooking.repository.NewsletterRepository;
@@ -22,7 +22,7 @@ public class NewsletterService {
     private NewsletterRepository newsletterRepository;
 
     @Autowired
-    private NewsletterEntityToModelConverter newsletterEntityToModelConverter;
+    private SimpleEntityToModelConverter simpleEntityToModelConverter;
 
     public void insertNewsletter(final String email) {
         Optional<NewsletterEntity> newsletterEntity = newsletterRepository.findByEmail(email);
@@ -51,14 +51,14 @@ public class NewsletterService {
         // lambda Java8 expression instead of needing to use a for loop
         List<NewsletterModel> newsletterModels =
                 newsletterEntities.stream()
-                        .map(newsletterEntityToModelConverter::toModel)
+                        .map(simpleEntityToModelConverter::newsletterEntityToModel)
                         .collect(Collectors.toList());
         return newsletterModels;
     }
 
     public NewsletterModel findById (final Long id) {
         NewsletterEntity newsletterEntity = newsletterRepository.getOne(id);
-        return newsletterEntityToModelConverter.toModel(newsletterEntity);
+        return simpleEntityToModelConverter.newsletterEntityToModel(newsletterEntity);
     }
 
     public void updateNewsletter(final NewsletterModel newsletterModel) {

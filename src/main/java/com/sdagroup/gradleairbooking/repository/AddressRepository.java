@@ -14,7 +14,9 @@ import java.util.List;
 @Repository
 public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
 
-    @Query("select new com.sdagroup.gradleairbooking.model.TopDestinationModel(count(distinct a.property),a.city,a.country) " +
-            "from AddressEntity a group by a.city,a.country order by count(distinct a.property) desc")
+    // We will find 'room' only through property
+    @Query("select new com.sdagroup.gradleairbooking.model.TopDestinationModel(" +
+            "count(distinct a.room.property),a.city,a.country) " +
+            "from AddressEntity a group by a.city, a.country order by count(distinct a.room.property) desc")
     List<TopDestinationModel> findTopDestinations();
 }

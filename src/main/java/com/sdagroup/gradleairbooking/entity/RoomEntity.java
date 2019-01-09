@@ -1,35 +1,32 @@
 package com.sdagroup.gradleairbooking.entity;
 
-/**
- * Created by Ryan Alexander on 08/01/2019.
- */
-
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
+/**
+ * Created by Ryan Alexander on 08/01/2019.
+ */
 @Getter
 @Setter
-@Builder
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "property")
+@Table(name ="room")
 @EntityListeners(AuditingEntityListener.class)
-public class PropertyEntity implements Serializable {
+
+public class RoomEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long propertyId;
+    private Long roomId;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -39,20 +36,21 @@ public class PropertyEntity implements Serializable {
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date modifiedAt;
+    private  Date modifiedAt;
 
-    @Column(unique = true, nullable = false)
-    private String propertyName;
+    private String roomName;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal startsFrom;
+    private int maximumPerson;
 
-//    Query optimization
-    @BatchSize(size = 10)
-    @OneToMany(targetEntity = RoomEntity.class, mappedBy ="property", cascade = CascadeType.ALL)
-    private List<RoomEntity> rooms;
+    private String includes;
 
-    @Column
-    @Size(max = 2048)
-    private String propertyDescription;
+    private BigDecimal pricePerNight;
+
+    @ManyToOne(targetEntity = PropertyEntity.class)
+    @JoinColumn(name="propertyId", referencedColumnName = "propertyId")
+    private PropertyEntity property;
+
+    @OneToOne(targetEntity = AddressEntity.class, mappedBy = "room", cascade= CascadeType.ALL)
+    private AddressEntity address;
+
 }
