@@ -353,24 +353,43 @@
 
                     </div>
 
-                    <div class="hotel-item-list-wrapper mb-40">
+                    <!--// Replicate through iteration-->
+                    <!--<div class="hotel-item-list-wrapper mb-40">-->
+                    <div th:each="propertyModel : ${propertyModelPage.getContent()}" class="hotel-item-list-wrapper mb-40">
 
                         <div class="hotel-item-list">
-                            <div class="image" style="background-image:url('images/top-destinations/01.jpg');"></div>
+                            <!--th:src="@{'/image/index/'+${topdestinationModel.city}+'.jpg'}"-->
+                            <!--'background-image:url('+ @{-->
+                            <!--<div class="image" style="background-image:url('images/top-destinations/01.jpg');"></div>-->
+                            <div class="image" style="'background-image:url('+ ${topdestinationModel.city}+'.jpg'}'"></div>
                             <div class="content">
                                 <div class="heading">
-                                    <h4>Hotel Metropolitan Tokyo</h4>
-                                    <p><i class="fa fa-map-marker text-primary"></i> Tokyo, Japan</p>
+                                    <!--<h4>Hotel Metropolitan Tokyo</h4>-->
+                                    <h4 th:text="${propertyModel.propertyName}"></h4>
+                                    <!--<p><i class="fa fa-map-marker text-primary"></i> Tokyo, Japan</p>-->
+                                    <p th:text="${propertyModel.addresses.get(0).country} +', '+${propertyModel.addresses.get(0).city}">
+                                        <i class="fa fa-map-marker text-primary"></i>
+                                    </p>
                                 </div>
-                                <div class="short-info">
-                                    Use securing confined his shutters. Delightful as he it acceptance an solicitude
-                                    discretion reasonably. Carriage we husbands advanced an perceive greatest expense on
-                                    demesne ye he.
-                                </div>
+                                <!--<div class="short-info">-->
+                                    <!--Use securing confined his shutters. Delightful as he it acceptance an solicitude-->
+                                    <!--discretion reasonably. Carriage we husbands advanced an perceive greatest expense on-->
+                                    <!--demesne ye he.-->
+                                <!--</div>-->
+                                <!--// how we trim by 100chrs using thymeleaf-->
+                                <div th:text="${#strings.substring(propertyModel.propertyDescription,0,100)} +'...'" class="short-info"></div>
                             </div>
                             <div class="absolute-bottom">
-                                <p class="text-primary"><i class="fa fa-check-circle"></i> Breakfast Included <span
-                                        class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p>
+                                <!--<p class="text-primary">-->
+                                    <!--<i class="fa fa-check-circle"></i> Breakfast Included -->
+                                    <!--<span class="mh-10">|</span> -->
+                                    <!--<i class="fa fa-check-circle"></i> Free Wifi in Room-->
+                                <!--</p>-->
+                                <p class="text-primary">
+                                    <i class="fa fa-check-circle" th:text="${propertyModel.amenities.get(0)}"></i>
+                                    <span class="mh-10">|</span>
+                                    <i class="fa fa-check-circle" th:text="${propertyModel.amenities.get(1)}"></i>
+                                </p>
                             </div>
                             <div class="absolute-right">
                                 <div class="meta-option">
@@ -382,9 +401,11 @@
                                     </a>
                                 </div>
                                 <div class="price-wrapper">
-                                    <p class="price"><span class="block">start from</span><span
-                                            class="number">$187</span> <span class="block">avg / night</span></p>
-                                    <a href="#" class="btn btn-danger btn-sm">Details</a>
+                                    <p class="price"><span class="block">start from</span>
+                                        <!--<span class="number">$187</span>-->
+                                        <span class="number" th:text="'€'+${propertyModel.startsFrom}"></span>
+                                        <span class="block">avg / night</span></p>
+                                    <a href="@{}" class="btn btn-danger btn-sm">Details</a>
                                 </div>
                             </div>
                         </div>

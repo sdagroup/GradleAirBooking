@@ -7,6 +7,8 @@ import com.sdagroup.gradleairbooking.entity.RoomEntity;
 import com.sdagroup.gradleairbooking.model.AddressModel;
 import com.sdagroup.gradleairbooking.model.NewsletterModel;
 import com.sdagroup.gradleairbooking.model.PropertyModel;
+import com.sdagroup.gradleairbooking.model.RoomModel;
+import com.sdagroup.gradleairbooking.utility.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -58,6 +60,33 @@ public class SimpleEntityToModelConverter {
         return propertyModels;
     }
 
+    // creating
+    public PropertyModel propertyEntityToModel(final PropertyEntity propertyEntity){
+
+        PropertyModel propertyModel = new PropertyModel();
+        propertyModel.setPropertyId(propertyEntity.getPropertyId());
+
+        if (propertyEntity.getAmenities() !=null){
+            List<String> amenities = StringUtils.splitStringByComma(propertyEntity.getAmenities());
+            propertyModel.setAmenities(amenities);
+        }
+        propertyModel.setResultPageImageUrl(propertyEntity.getResultPageImageUrl());
+
+        List<RoomModel> roomModels = new ArrayList<>();
+        for (RoomEntity roomEntity : propertyEntity.getRooms()){
+            RoomModel roomModel = new RoomModel();
+            roomModel.setRoomId(roomEntity.getRoomId());
+            roomModel.setRoomName(roomEntity.getRoomName());
+            roomModel.setIncludes(roomEntity.getIncludes());
+            roomModel.setMaximumPerson(roomEntity.getMaximumPerson());
+            roomModel.setPricePerNight(roomEntity.getPricePerNight());
+
+            roomModels.add(roomModel);
+        }
+        propertyModel.setRooms(roomModels);
+        return propertyModel;
+    }
+
     public List<PropertyModel> addressEntitiesToPropertyModels(final List<AddressEntity> addressEntities) {
         List<PropertyModel> propertyModels = new ArrayList<>();
         for (AddressEntity addressEntity : addressEntities) {
@@ -65,7 +94,16 @@ public class SimpleEntityToModelConverter {
             propertyModel.setPropertyId(addressEntity.getRoom().getProperty().getPropertyId());
             propertyModel.setPropertyName(addressEntity.getRoom().getProperty().getPropertyName());
             propertyModel.setStartsFrom(addressEntity.getRoom().getProperty().getStartsFrom());
+            propertyModel.setPropertyDescription(addressEntity.getRoom().getProperty().getPropertyDescription());
 
+            // we call the Utils that we wrote for splitting the description
+            if(addressEntity.getRoom().getProperty().getAmenities() !=null) {
+                List<String> amenities = StringUtils.splitStringByComma(addressEntity
+                        .getRoom()
+                        .getProperty()
+                        .getAmenities());
+                propertyModel.setAmenities(amenities);
+            }
             AddressModel addressModel = new AddressModel();
             addressModel.setAddressId(addressEntity.getAddressId());
             addressModel.setCity(addressEntity.getCity());
@@ -84,4 +122,6 @@ public class SimpleEntityToModelConverter {
         Set<Object> objects = new HashSet<>();
         return t -> objects.add(f.apply(t));
     }
+
+
 }
