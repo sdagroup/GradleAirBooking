@@ -33,23 +33,31 @@ public class PropertyService {
     @Autowired
     private CustomPropertyRepository customPropertyRepository;
 
-//    public PropertyModel getPropertyById(final Long propertyId){
-//        Optional<PropertyEntity> propertyEntity = propertyRepository.findById(propertyId);
-//
-//        return propertyRepository.findById(propertyId);
-//
-//    }
 
-    public Page<PropertyModel> getSearchedProperties(final SearchPropertyModel searchPropertyModel){
+    public PropertyModel getPropertyByPropertyIdAndAddressId(final Long propertyId, final Long addressId) {
+        Optional<PropertyEntity> propertyEntity = propertyRepository.findById(propertyId);
+
+        if (propertyEntity.isPresent()) {
+            return simpleEntityToModelConverter.getPropertyByPropertyIdAndAddressId(propertyEntity.get(), addressId);
+        } else {
+            throw new NullPointerException("You haven't selected a property");
+        }
+    }
+
+    public List<PropertyModel> getAllProperties() {
+        return simpleEntityToModelConverter.propertyEntitiesToModels(propertyRepository.findAll());
+    }
+
+    public Page<PropertyModel> getSearchedProperties(final SearchPropertyModel searchPropertyModel) {
 
         // returns one specification and one hibernation query
         List<AddressEntity> addressEntities = customPropertyRepository
                 .findAll(prepareSearchPropertyQuery(searchPropertyModel));
 
-        List<PropertyModel> propertyModels= simpleEntityToModelConverter
+        List<PropertyModel> propertyModels = simpleEntityToModelConverter
                 .addressEntitiesToPropertyModels(addressEntities);
 
-        return new PageImpl<>(propertyModels, PageRequest.of(0,10),propertyModels.size());
+        return new PageImpl<>(propertyModels, PageRequest.of(0, 10), propertyModels.size());
     }
 
 }

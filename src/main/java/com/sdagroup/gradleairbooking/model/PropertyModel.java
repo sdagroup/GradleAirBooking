@@ -24,7 +24,7 @@ public class PropertyModel {
     private String propertyDescription;
     private BigDecimal startsFrom;
     private String resultPageImageUrl;
-    private List<String> mediaLinks;
+    private List<MediaModel> mediaLinks;
 
 
     private List<AddressModel> addresses=new ArrayList<>();

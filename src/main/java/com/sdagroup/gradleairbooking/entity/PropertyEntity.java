@@ -65,7 +65,7 @@ public class PropertyEntity implements Serializable {
 
     @BatchSize(size = 10)
     @OneToMany(targetEntity = MediaEntity.class, mappedBy = "property", cascade = CascadeType.ALL)
-    private List<RoomEntity> mediaLinks;
+    private List<MediaEntity> mediaLinks;
 
 
 

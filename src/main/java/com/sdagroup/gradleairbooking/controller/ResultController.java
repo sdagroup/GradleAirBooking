@@ -20,8 +20,13 @@ public class ResultController {
     @Autowired
     private PropertyService propertyService;
 
-    @GetMapping("/search/{propertyId}")
-    public ModelAndView searchPropertyById(@PathVariable("propertyId") Long propertyId) {
-        return null;
+    @GetMapping("/search/property/{propertyId}/address/{addressId}")
+    public ModelAndView searchPropertyById(@PathVariable("propertyId") Long propertyId,
+                                           @PathVariable("addressId") Long addressId) {
+
+        PropertyModel propertyModel = propertyService.getPropertyByPropertyIdAndAddressId(propertyId, addressId);
+        return new ModelAndView("property-detail")
+                .addObject("searchPropertyModel", new SearchPropertyModel())
+                .addObject("propertyModel", propertyModel);
     }
 }

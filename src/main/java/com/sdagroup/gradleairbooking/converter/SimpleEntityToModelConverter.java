@@ -1,13 +1,7 @@
 package com.sdagroup.gradleairbooking.converter;
 
-import com.sdagroup.gradleairbooking.entity.AddressEntity;
-import com.sdagroup.gradleairbooking.entity.NewsletterEntity;
-import com.sdagroup.gradleairbooking.entity.PropertyEntity;
-import com.sdagroup.gradleairbooking.entity.RoomEntity;
-import com.sdagroup.gradleairbooking.model.AddressModel;
-import com.sdagroup.gradleairbooking.model.NewsletterModel;
-import com.sdagroup.gradleairbooking.model.PropertyModel;
-import com.sdagroup.gradleairbooking.model.RoomModel;
+import com.sdagroup.gradleairbooking.entity.*;
+import com.sdagroup.gradleairbooking.model.*;
 import com.sdagroup.gradleairbooking.utility.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +30,7 @@ public class SimpleEntityToModelConverter {
 //    }
 
     // using Builder (preferred)
-    public NewsletterModel newsletterEntityToModel (final NewsletterEntity newsletterEntity) {
+    public NewsletterModel newsletterEntityToModel(final NewsletterEntity newsletterEntity) {
         NewsletterModel newsletterModel = new NewsletterModel();
         newsletterModel.setId(newsletterEntity.getId());
         newsletterModel.setCreatedAt(newsletterEntity.getCreatedAt());
@@ -44,47 +38,82 @@ public class SimpleEntityToModelConverter {
         return newsletterModel;
     }
 
-    public List<PropertyModel> propertyEntitiesToModels(final List<PropertyEntity> propertyEntities){
-        List<PropertyModel> propertyModels= new ArrayList<>();
+    public List<PropertyModel> propertyEntitiesToModels(final List<PropertyEntity> propertyEntities) {
+        List<PropertyModel> propertyModels = new ArrayList<>();
         for (PropertyEntity propertyEntity : propertyEntities) {
             List<AddressModel> addressModels = new ArrayList<>();
-            for (RoomEntity roomEntity : propertyEntity.getRooms()){
+            for (RoomEntity roomEntity : propertyEntity.getRooms()) {
                 addressModels.add(AddressModel.builder().addressId(roomEntity.getAddress().getAddressId())
-                .street(roomEntity.getAddress().getStreet()).postalCode(roomEntity.getAddress().getPostalCode())
-                .city(roomEntity.getAddress().getCity()).country(roomEntity.getAddress().getCountry()).build());
+                        .street(roomEntity.getAddress().getStreet()).postalCode(roomEntity.getAddress().getPostalCode())
+                        .city(roomEntity.getAddress().getCity()).country(roomEntity.getAddress().getCountry()).build());
             }
             propertyModels.add(PropertyModel.builder().addresses(addressModels).propertyId(propertyEntity
-            .getPropertyId()).startsFrom(propertyEntity.getStartsFrom())
-            .propertyName(propertyEntity.getPropertyName()).build());
+                    .getPropertyId()).startsFrom(propertyEntity.getStartsFrom())
+                    .propertyName(propertyEntity.getPropertyName()).build());
         }
         return propertyModels;
     }
 
-    // creating
-    public PropertyModel propertyEntityToModel(final PropertyEntity propertyEntity){
+    // to filter address query
+    public PropertyModel getPropertyByPropertyIdAndAddressId(final PropertyEntity propertyEntity, final long addressId) {
 
         PropertyModel propertyModel = new PropertyModel();
         propertyModel.setPropertyId(propertyEntity.getPropertyId());
 
-        if (propertyEntity.getAmenities() !=null){
+        if (propertyEntity.getAmenities() != null) {
             List<String> amenities = StringUtils.splitStringByComma(propertyEntity.getAmenities());
             propertyModel.setAmenities(amenities);
         }
+
+        // call the correct media links with this
         propertyModel.setResultPageImageUrl(propertyEntity.getResultPageImageUrl());
-
-        List<RoomModel> roomModels = new ArrayList<>();
-        for (RoomEntity roomEntity : propertyEntity.getRooms()){
-            RoomModel roomModel = new RoomModel();
-            roomModel.setRoomId(roomEntity.getRoomId());
-            roomModel.setRoomName(roomEntity.getRoomName());
-            roomModel.setIncludes(roomEntity.getIncludes());
-            roomModel.setMaximumPerson(roomEntity.getMaximumPerson());
-            roomModel.setPricePerNight(roomEntity.getPricePerNight());
-
-            roomModels.add(roomModel);
+        List<MediaModel> mediaModels = new ArrayList<>();
+        for (MediaEntity mediaEntity : propertyEntity.getMediaLinks()) {
+            MediaModel mediaModel = new MediaModel();
+            mediaModel.setMediaId(mediaEntity.getMediaId());
+            mediaModels.add(mediaModel);
         }
+        propertyModel.setMediaLinks(mediaModels);
+
+        propertyModel.setPropertyDescription(propertyEntity.getPropertyDescription());
+        propertyModel.setStartsFrom(propertyEntity.getStartsFrom());
+
+        List<RoomModel> roomModels = getRoomModels(propertyEntity, addressId);
+
         propertyModel.setRooms(roomModels);
+
         return propertyModel;
+    }
+
+    private List<RoomModel> getRoomModels(PropertyEntity propertyEntity, long addressId) {
+        List<RoomModel> roomModels = new ArrayList<>();
+        List<AddressModel> addressModels = new ArrayList<>();
+
+        boolean isAddressPopulated = false;
+        for (RoomEntity roomEntity : propertyEntity.getRooms()) {
+            if (roomEntity.getAddress().getAddressId() == addressId) {
+                RoomModel roomModel = new RoomModel();
+                roomModel.setRoomId(roomEntity.getRoomId());
+                roomModel.setRoomName(roomEntity.getRoomName());
+                roomModel.setIncludes(roomEntity.getIncludes());
+                roomModel.setMaximumPerson(roomEntity.getMaximumPerson());
+                roomModel.setPricePerNight(roomEntity.getPricePerNight());
+                roomModels.add(roomModel);
+
+                // alternative to using the boolean flag solution
+                // if(addressModels.size() <1) {
+                if (!isAddressPopulated) {
+                    AddressModel addressModel = new AddressModel();
+                    addressModel.setAddressId(roomEntity.getAddress().getAddressId());
+                    addressModel.setCity(roomEntity.getAddress().getCity());
+                    addressModel.setCountry(roomEntity.getAddress().getCountry());
+                    addressModel.setPostalCode(roomEntity.getAddress().getPostalCode());
+                    addressModels.add(addressModel);
+                    isAddressPopulated = true;
+                }
+            }
+        }
+        return roomModels;
     }
 
     public List<PropertyModel> addressEntitiesToPropertyModels(final List<AddressEntity> addressEntities) {
@@ -97,7 +126,7 @@ public class SimpleEntityToModelConverter {
             propertyModel.setPropertyDescription(addressEntity.getRoom().getProperty().getPropertyDescription());
 
             // we call the Utils that we wrote for splitting the description
-            if(addressEntity.getRoom().getProperty().getAmenities() !=null) {
+            if (addressEntity.getRoom().getProperty().getAmenities() != null) {
                 List<String> amenities = StringUtils.splitStringByComma(addressEntity
                         .getRoom()
                         .getProperty()
@@ -122,6 +151,5 @@ public class SimpleEntityToModelConverter {
         Set<Object> objects = new HashSet<>();
         return t -> objects.add(f.apply(t));
     }
-
 
 }
