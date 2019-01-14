@@ -16,9 +16,14 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
+    // protection for private fields
+    public AddressService(final AddressRepository addressRepository){
+        this.addressRepository = addressRepository;
+    }
+
     public List<TopDestinationModel> getTopDestinations() {
         List<TopDestinationModel> topDestinationModels = addressRepository.findTopDestinations();
-        return topDestinationModels.size() > 8 ? topDestinationModels.subList(0, 7) : topDestinationModels;
+        return topDestinationModels.size() > 8 ? topDestinationModels.subList(0, 8) : topDestinationModels;
     }
 
 }

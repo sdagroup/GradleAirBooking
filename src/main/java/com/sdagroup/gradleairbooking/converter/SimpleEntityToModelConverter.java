@@ -67,12 +67,8 @@ public class SimpleEntityToModelConverter {
 
         // call the correct media links with this
         propertyModel.setResultPageImageUrl(propertyEntity.getResultPageImageUrl());
-        List<MediaModel> mediaModels = new ArrayList<>();
-        for (MediaEntity mediaEntity : propertyEntity.getMediaLinks()) {
-            MediaModel mediaModel = new MediaModel();
-            mediaModel.setMediaId(mediaEntity.getMediaId());
-            mediaModels.add(mediaModel);
-        }
+
+        List<MediaModel> mediaModels = getMediaModels(propertyEntity);
         propertyModel.setMediaLinks(mediaModels);
 
         propertyModel.setPropertyDescription(propertyEntity.getPropertyDescription());
@@ -83,6 +79,16 @@ public class SimpleEntityToModelConverter {
         propertyModel.setRooms(roomModels);
 
         return propertyModel;
+    }
+
+    private List<MediaModel> getMediaModels(PropertyEntity propertyEntity) {
+        List<MediaModel> mediaModels = new ArrayList<>();
+        for (MediaEntity mediaEntity : propertyEntity.getMediaLinks()) {
+            MediaModel mediaModel = new MediaModel();
+            mediaModel.setMediaId(mediaEntity.getMediaId());
+            mediaModels.add(mediaModel);
+        }
+        return mediaModels;
     }
 
     private List<RoomModel> getRoomModels(PropertyEntity propertyEntity, long addressId) {
